@@ -1,0 +1,60 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+type SAM {
+  id: String!
+  name: String!
+  email: String!
+  category: String!
+}
+
+type Seller {
+  application_no: String!
+  name: String!
+  email: String!
+  status: String!
+  sam_id: String!
+}
+
+input ChangeIn {
+  id: String!
+}
+
+input SamIn {
+  id: String!
+}
+
+input TransferIn {
+  seller_id: String!
+  sam_id: String!
+  msg: String!
+}
+
+input StatusIn {
+  status: String!
+}
+
+input SellerDataIn {
+  seller_id: String!
+  name: String
+  email: String
+  status: String
+  sam_id: String
+}
+
+type Query {
+  GetAllSAMs: [SAM!]!
+  GetAllSellers: [Seller!]!
+  SellersByStatus(input: StatusIn): [Seller!]!
+  SellersBySam(input: SamIn): [Seller!]!
+  DownloadData: [Seller!]!
+}
+
+type Mutation {
+  AcceptSeller(input: ChangeIn): Seller!
+  RejectSeller(input: ChangeIn): Seller!
+  TransferSeller(input: TransferIn): Seller!
+  AcceptBulk(input: [ChangeIn]): [Seller!]!
+  UpdateSellerData(input: SellerDataIn): Seller!
+}
