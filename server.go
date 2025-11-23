@@ -3,6 +3,7 @@ package main
 import (
 	"SAM/graph"
 	"SAM/graph/generated"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -17,6 +18,8 @@ func main() {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
+	} else {
+		fmt.Println("Port:", port)
 	}
 
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
